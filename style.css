@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-th{ padding: 5px 10px;
+thead tr{ padding: 5px 10px;
     border-right: 1px solid grey;
     background-color:mediumpurple;
  
@@ -12,12 +12,14 @@ table{
      padding: 50px;
      text-align: left;
      font-family: "Roboto", sans-serif;
-     
+     width: 80%;
+     margin: 0 auto;
 }
-      
+    
+th,  td{
+  border: 1px solid grey;
+}
   td{
- border-top: 1px solid grey;
- border-right: 1px solid grey;
  padding: 5px 10px;
        
 }
@@ -25,3 +27,12 @@ table{
     background-color: lightgray; /
 }
  
+
+
+
+.positive{
+  color: green;
+}
+.negative{
+  color: red;
+}

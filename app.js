@@ -1,110 +1,65 @@
-let body = document.querySelector("body");
+
+
+const data = [
+    { "name": "Bitcoin", "ticker": "BTC", "value": "9685", "change": "2.83%" },
+    { "name": "Ethereum", "ticker": "ETH", "value": "210.5", "change": "6.17%" },
+    { "name": "Ripple", "ticker": "XRP", "value": "0.2812", "change": "2.47%" },
+    { "name": "Bitcoin Cash", "ticker": "BCH", "value": "441.4", "change": "5.01%" },
+    { "name": "Bitcoin SV", "ticker": "BSV", "value": "303.17", "change": "5.53%" },
+    { "name": "Litecoin", "ticker": "LTC", "value": "74.935", "change": "4.25%" },
+    { "name": "Tether", "ticker": "USDT", "value": "0.9994", "change": "-1.7%" },
+    { "name": "EOS", "ticker": "EOS", "value": "4.6161", "change": "3.15%" },
+    { "name": "Binance Coin", "ticker": "BNB", "value": "19.824", "change": "-3.82%" },
+    { "name": "Cardano", "ticker": "ADA", "value": "0.060389", "change": "2.93%" },
+    { "name": "Tezos", "ticker": "XTZ", "value": "2.1247", "change": "6.12%" },
+    { "name": "Ethereum Classic", "ticker": "ETC", "value": "12.5988", "change": "4.09%" },
+    { "name": "Stellar", "ticker": "XLM", "value": "0.07034", "change": "-4.10%" },
+    { "name": "Monero", "ticker": "XMR", "value": "79.523", "change": "3.45%" },
+    { "name": "TRON", "ticker": "TRX", "value": "0.020881", "change": "5.21%" }
+];
+
+
 let table = document.createElement("table");
-body.append(table);
-console.log(table);
+let thead=document.createElement("thead");
+let tbody=document.createElement("tbody");
+let header=Object.keys(data[0]);
+let headerTR=document.createElement("tr")
+console.log(header);
 
-// Basliq
-function createTableHeader(headers) {
-    let headerRow = document.createElement("tr");
-    headers.forEach(text => {
-        let th = document.createElement("th");
-        th.textContent = text;
-        headerRow.append(th);
-    });
-    table.append(headerRow);
-}
-createTableHeader(["Name", "Ticker", "Value", "Change"]);
+header.map(head=>{
+  let th= document.createElement ("th");
+  th.textContent=head.toUpperCase();
+  headerTR.append(th);
+})
 
 
-// govde
-function addTableRow(data) {
-    let row = document.createElement("tr");
-
-    data.forEach(text => {
-        let td = document.createElement("td");
-        td.textContent = text;
-        row.append(td);
-    });
-
-    table.append(row);
+data.map(a => {
+    let tr= document.createElement("tr");
+ tr.innerHTML = `
+  <td>${a.name}</td>
+  <td>${a.ticker}</td>
+  <td>${a.value}</td>
+  <td>${a.change}</td>
+`;
 
 
-}
-addTableRow(["Bitcoin", "BTC", "9685", "2.83%"]);
-addTableRow(["Ethereum", "ETH", "210.5","6.17%"]);
-addTableRow(["Solana", "SOL", "98", "4.01%"]);
-addTableRow([ "Ripple",  "XRP",  "0.2812",  "2.47%"]);
-addTableRow ([ "Bitcoin Cash",  "BCH",  "441.4", "5.01%"]);
-addTableRow(["Bitcoin SV",  "BSV", "303.17",  "5.53%" ]);
-addTableRow ([ "Litecoin", "LTC", "74.935","4.25%"]);
-addTableRow([ "Tether", "USDT",  "0.9994","-1.7%" ]);
-addTableRow([ "EOS",  "EOS", "4.6161",  "3.15%"]);
-addTableRow ([ "Binance Coin", "BNB",  "19.824",  "-3.82%"]);
-addTableRow (["Cardano",  "ADA", "0.060389",  "2.93%" ]);
-addTableRow   (["Tezos", "XTZ",  "2.1247",  "6.12%" ]);
-addTableRow ([ "Ethereum Classic","ETC",  "12.5988", "4.09%"]);
-addTableRow ([ "Stellar",  "XLM",  "0.07034", "-4.10%" ]);
-addTableRow (["Monero", "XMR",  "79.523",  "3.45%" ]);
-addTableRow  ([ "TRON", "TRX",  "0.020881", "5.21%" ]);
+      tbody.append(tr)
+
+})
+thead.append(headerTR) 
+table.append(thead, tbody)
+document.body.append(table)
 
 
+let lastTD=document.querySelectorAll("td:last-child");
+lastTD.forEach(td=> {
+    console.log(td.textContent);
+    let content= td.textContent.replace("%", "")
+    if(content>0){ 
+        td.classList.add("positive")
 
-
-let rows = table.querySelectorAll("tr:nth-child(n+2)"); 
-
-rows.forEach(row => {
-    let changeCell = row.children[3];
-
-
-    if (changeCell.textContent.includes("-")) {
-        changeCell.style.color = "red";
-    } else {
-        changeCell.style.color = "green";
+    }else{
+        td.classList.add("negative")
     }
-});
-
-
-
-
-
-
-
-
-// let users = [
-//   { name: "Bitcoin", ticker: "BTC", value: "9685", change: "2.83%" },
- // { name: "Ethereum", ticker: "ETH", value: "210.5", change: "6.17%" },
- // { name: "Ripple", ticker: "XRP", value: "0.2812", change: "2.47%" },
-// ];
-
-// let body = document.querySelector("body");
-
-// let table = document.createElement("table");
-
-// body.append(table);
-
-// // 1 BAŞLIQLAR (yalnız 1 dəfə)
-// let headerRow = document.createElement("tr");
-// table.append(headerRow);
-
-// let headers = Object.keys(users[0]);
-
-// headers.forEach(key => {
-//     let th = document.createElement("th");
-//     th.textContent = key;
-//     headerRow.append(th);
-// });
-
-// // 2 DATA SƏTİRLƏRİ
-// users.forEach(user => {
-//     let row = document.createElement("tr");
-
-//     headers.forEach(key => {
-//         let td = document.createElement("td");
-//         td.textContent = user[key];
-//         row.append(td);
-//     });
-
-//     table.append(row);
-// });
-
-// console.log(users);
+     
+})
